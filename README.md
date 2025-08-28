@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/yash-prakash18/Book-Library-Api/main/docs/logo.png" alt="Book Library API Logo" width="150" height="150">
-  <h1>📚 Book Library API</h1>
+  <h1>📚 BookAPI Library </h1>
   <p>A simple and efficient RESTful API for managing a collection of books, built with Python and FastAPI.</p>
   <p>
     <img src="https://img.shields.io/badge/Python-3.8%2B-blue.svg?logo=python&logoColor=white" alt="Python 3.8+">
