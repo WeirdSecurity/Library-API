@@ -92,4 +92,3 @@ This API provides a complete set of endpoints to manage your books. For a rich, 
 
 ---
 
-### 📂 Project Structure
