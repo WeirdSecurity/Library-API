@@ -7,12 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #3B82F6;
-            --secondary-color: #1F2937;
+            --primary-color: #0077B6;
+            --secondary-color: #1a1a2e;
             --text-color: #333;
-            --bg-color: #F9FAFB;
+            --bg-color: #f4f7f9;
             --card-bg: #FFFFFF;
-            --border-color: #E5E7EB;
+            --border-color: #e0e6ed;
+            --code-bg: #f8f9fa;
         }
 
         body {
@@ -22,11 +23,11 @@
             background-color: var(--bg-color);
             margin: 0;
             padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
             background: var(--card-bg);
             padding: 2.5rem;
             border-radius: 12px;
@@ -40,7 +41,7 @@
 
         h1 {
             color: var(--primary-color);
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
@@ -48,13 +49,9 @@
             gap: 0.75rem;
         }
 
-        h1 .emoji {
-            font-size: 2.5rem;
-        }
-
         .subtitle {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
+            font-size: 1.2rem;
+            color: #555;
             font-weight: 400;
         }
 
@@ -67,31 +64,38 @@
         }
         
         .badge {
-            padding: 0.3em 0.7em;
-            border-radius: 4px;
-            font-size: 0.85rem;
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 700;
             color: white;
             background-color: #555;
+            text-transform: uppercase;
         }
-        
-        .badge.rest { background-color: #0077b6; }
+
+        .badge.rest { background-color: #0077B6; }
         .badge.python { background-color: #3776AB; }
         .badge.fastapi { background-color: #005571; }
         .badge.sqlite { background-color: #003B57; }
 
         section {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--border-color);
         }
 
         h2 {
             color: var(--secondary-color);
-            border-bottom: 2px solid var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
         }
 
         p, ul {
@@ -99,21 +103,22 @@
         }
 
         ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
+            list-style-type: none;
+            padding-left: 0;
         }
-
-        code {
-            background-color: #F0F2F5;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9rem;
+        
+        ul li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
         }
 
         pre {
-            background-color: #1E293B;
-            color: #E2E8F0;
+            background-color: #2D2D2D;
+            color: #CCCCCC;
             padding: 1rem;
             border-radius: 8px;
             overflow-x: auto;
@@ -121,29 +126,47 @@
             word-wrap: break-word;
             font-family: monospace;
             font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 1rem;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #c7254e;
         }
 
         .endpoint-card {
-            background: #F8F9FB;
+            background: #F8F9FA;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
+            transition: transform 0.2s;
         }
 
-        .endpoint-card h3 {
+        .endpoint-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .endpoint-card h4 {
             margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
             color: var(--primary-color);
-            font-size: 1.4rem;
         }
 
         .endpoint-card .method {
             display: inline-block;
-            padding: 0.2rem 0.6rem;
+            padding: 0.3rem 0.8rem;
             margin-right: 0.5rem;
-            border-radius: 4px;
+            border-radius: 6px;
             font-weight: bold;
             color: white;
+            text-transform: uppercase;
+            font-size: 0.8rem;
         }
 
         .method.get { background-color: #10B981; }
@@ -154,10 +177,11 @@
         .endpoint-path {
             font-family: monospace;
             background-color: var(--card-bg);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
             border: 1px solid var(--border-color);
             font-size: 0.9rem;
+            color: #1F2937;
         }
 
         .response-code {
@@ -168,10 +192,10 @@
         .error { color: #EF4444; }
 
         .note {
-            background-color: #FEF9C3;
-            border-left: 4px solid #FCD34D;
+            background-color: #FFFBEA;
+            border-left: 5px solid #FCD34D;
             padding: 1rem;
-            border-radius: 4px;
+            border-radius: 8px;
             margin-top: 1rem;
         }
     </style>
@@ -179,7 +203,7 @@
 <body>
     <div class="container">
         <header>
-            <h1><span class="emoji">📚</span> Book Library API</h1>
+            <h1><span role="img" aria-label="books emoji">📚</span> Book Library API</h1>
             <p class="subtitle">A simple and efficient RESTful API for managing a collection of books.</p>
             <div class="badges">
                 <span class="badge rest">RESTful</span>
@@ -192,21 +216,32 @@
         <section id="features">
             <h2>✨ Features</h2>
             <ul>
-                <li><strong>CRUD Operations:</strong> Create, read, update, and delete books with ease.</li>
-                <li><strong>FastAPI Framework:</strong> Built on the modern, high-performance FastAPI.</li>
-                <li><strong>SQLite Database:</strong> Uses a lightweight, file-based SQLite database for persistence.</li>
-                <li><strong>Input Validation:</strong> Includes checks for duplicate entries and invalid data (e.g., future publication years).</li>
-                <li><strong>Error Handling:</strong> Provides clear and user-friendly error messages for common issues.</li>
-                <li><strong>Automatic Interactive Docs:</strong> Automatically generates comprehensive API documentation with Swagger UI and ReDoc.</li>
+                <li><strong>Complete CRUD Operations:</strong> Seamlessly create, read, update, and delete book records.</li>
+                <li><strong>High-Performance Framework:</strong> Built using the modern, fast, and robust **FastAPI**.</li>
+                <li><strong>Lightweight Database:</strong> Data is stored persistently in a simple, file-based **SQLite** database.</li>
+                <li><strong>Robust Input Validation:</strong> The API intelligently validates data, handling cases like duplicate entries and invalid publication years.</li>
+                <li><strong>Clear Error Handling:</strong> Provides user-friendly error messages with appropriate HTTP status codes for a better developer experience.</li>
+                <li><strong>Automatic Interactive Docs:</strong> Get started instantly with auto-generated API documentation via Swagger UI and ReDoc.</li>
+            </ul>
+        </section>
+
+        <section id="technology-stack">
+            <h2>🛠️ Technology Stack</h2>
+            <p>This project leverages the following technologies:</p>
+            <ul>
+                <li><strong>Python 3:</strong> The core programming language.</li>
+                <li><strong>FastAPI:</strong> The web framework for building the API.</li>
+                <li><strong>Uvicorn:</strong> An ultra-fast ASGI server for running the application.</li>
+                <li><strong>SQLite:</strong> The serverless, self-contained SQL database engine.</li>
             </ul>
         </section>
 
         <section id="getting-started">
             <h2>🚀 Getting Started</h2>
-            <p>Follow these simple steps to get the API running on your local machine.</p>
+            <p>Follow these simple steps to get the API up and running on your local machine.</p>
             
             <h3>Prerequisites</h3>
-            <p>Ensure you have <strong>Python 3.8+</strong> installed.</p>
+            <p>Ensure you have <strong>Python 3.8+</strong> installed on your system.</p>
             
             <h3>Installation & Setup</h3>
             <ol>
@@ -224,129 +259,19 @@ python -m venv venv
 .\venv\Scripts\activate</code></pre>
                 </li>
                 <li><strong>Install the required packages:</strong>
-                    <p>All dependencies are listed in the <code>requirements.txt</code> file.</p>
+                    <p>The <code>requirements.txt</code> file contains all the necessary dependencies.</p>
                     <pre><code>pip install -r requirements.txt</code></pre>
                 </li>
                 <li><strong>Run the API server:</strong>
                     <pre><code>uvicorn main:app --reload</code></pre>
-                    <p>The <code>--reload</code> flag enables auto-reloading during development. The API will be live at <code>http://127.0.0.1:8000</code>.</p>
+                    <p>The <code>--reload</code> flag enables automatic server restarts on code changes. The API will now be live at <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>.</p>
                 </li>
             </ol>
         </section>
 
-        <section id="api-docs">
+        <section id="api-endpoints">
             <h2>📖 API Endpoints Documentation</h2>
-            <p>This API provides a set of endpoints to manage your book collection. For a full interactive experience, visit the auto-generated documentation pages:</p>
+            <p>The API provides a complete set of endpoints to manage your books. For a rich, interactive experience, navigate to the auto-generated documentation pages:</p>
             <ul>
-                <li><strong>Swagger UI:</strong> <a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a></li>
-                <li><strong>ReDoc:</strong> <a href="http://127.0.0.1:8000/redoc">http://127.0.0.1:8000/redoc</a></li>
-            </ul>
-            
-            <p>Here are the key endpoints:</p>
-
-            <div class="endpoint-card">
-                <h3>1. Get All Books</h3>
-                <span class="method get">GET</span> <span class="endpoint-path">/books/</span>
-                <p>Retrieves a list of all books in the library.</p>
-                <h4>Responses:</h4>
-                <p>
-                    <span class="response-code success">200 OK</span>: Returns a JSON array of all books.
-                </p>
-                <p>
-                    <span class="response-code error">404 Not Found</span>: If no books are in the database.
-                </p>
-            </div>
-
-            <div class="endpoint-card">
-                <h3>2. Find a Specific Book</h3>
-                <span class="method get">GET</span> <span class="endpoint-path">/find/</span>
-                <p>Finds a single book by its unique ID.</p>
-                <h4>Query Parameters:</h4>
-                <ul>
-                    <li><code>id</code> (integer, required): The ID of the book.</li>
-                </ul>
-                <h4>Responses:</h4>
-                <p>
-                    <span class="response-code success">200 OK</span>: Returns the JSON object for the book.
-                </p>
-                <p>
-                    <span class="response-code error">404 Not Found</span>: If the book ID does not exist.
-                </p>
-            </div>
-
-            <div class="endpoint-card">
-                <h3>3. Add a New Book</h3>
-                <span class="method get">GET</span> <span class="endpoint-path">/addbook/</span>
-                <div class="note">
-                    <strong>Note:</strong> While this API uses a <code>GET</code> method, the conventional method for creating resources is <code>POST</code>.
-                </div>
-                <p>Adds a new book to the library.</p>
-                <h4>Query Parameters:</h4>
-                <ul>
-                    <li><code>title</code> (string, required)</li>
-                    <li><code>author</code> (string, required)</li>
-                    <li><code>year</code> (integer, required)</li>
-                </ul>
-                <h4>Responses:</h4>
-                <p>
-                    <span class="response-code success">200 OK</span>: Success message.
-                </p>
-                <p>
-                    <span class="response-code error">409 Conflict</span>: If a book with the same details already exists.
-                </p>
-                <p>
-                    <span class="response-code error">422 Unprocessable Entity</span>: If the year is invalid (e.g., in the future).
-                </p>
-            </div>
-
-            <div class="endpoint-card">
-                <h3>4. Update a Book</h3>
-                <span class="method get">GET</span> <span class="endpoint-path">/updatebook/</span>
-                <div class="note">
-                    <strong>Note:</strong> While this API uses a <code>GET</code> method, the conventional methods for updating resources are <code>PUT</code> or <code>PATCH</code>.
-                </div>
-                <p>Updates the details of an existing book by its ID.</p>
-                <h4>Query Parameters:</h4>
-                <ul>
-                    <li><code>id</code> (integer, required)</li>
-                    <li><code>title</code> (string, required)</li>
-                    <li><code>author</code> (string, required)</li>
-                    <li><code>year</code> (integer, required)</li>
-                </ul>
-                <h4>Responses:</h4>
-                <p>
-                    <span class="response-code success">200 OK</span>: Success message.
-                </p>
-                <p>
-                    <span class="response-code error">404 Not Found</span>: If the book ID is not found.
-                </p>
-            </div>
-
-            <div class="endpoint-card">
-                <h3>5. Delete a Book</h3>
-                <span class="method get">GET</span> <span class="endpoint-path">/deletebook/</span>
-                <div class="note">
-                    <strong>Note:</strong> While this API uses a <code>GET</code> method, the conventional method for deleting resources is <code>DELETE</code>.
-                </div>
-                <p>Deletes a book from the library by its ID.</p>
-                <h4>Query Parameters:</h4>
-                <ul>
-                    <li><code>id</code> (integer, required): The ID of the book to delete.</li>
-                </ul>
-                <h4>Responses:</h4>
-                <p>
-                    <span class="response-code success">200 OK</span>: Success message.
-                </p>
-                <p>
-                    <span class="response-code error">404 Not Found</span>: If the book ID is not found.
-                </p>
-            </div>
-        </section>
-
-        <section id="contributions">
-            <h2>🤝 Contribution</h2>
-            <p>Contributions are welcome! Feel free to open an issue or submit a pull request.</p>
-        </section>
-    </div>
-</body>
-</html>
+                <li><strong>Swagger UI:</strong> <a href="http://127.0.0.1:8000/docs" target="_blank">http://127.0.0.1:8000/docs</a></li>
+                <li><strong>ReDoc:</strong> <a href="http://127.0.0.1:
