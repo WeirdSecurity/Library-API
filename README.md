@@ -1,277 +1,223 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Library API</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #0077B6;
-            --secondary-color: #1a1a2e;
-            --text-color: #333;
-            --bg-color: #f4f7f9;
-            --card-bg: #FFFFFF;
-            --border-color: #e0e6ed;
-            --code-bg: #f8f9fa;
-        }
+📚 Book Library API
+A simple and efficient RESTful API for managing a collection of books, built with Python and FastAPI. This project allows you to perform complete CRUD (Create, Read, Update, Delete) operations on a book library.
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
 
-        .container {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-        }
+✨ Features
 
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+CRUD Operations: Create, Read, Update, and Delete books.
 
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-        }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #555;
-            font-weight: 400;
-        }
+FastAPI Framework: Built using the modern, high-performance FastAPI framework.
 
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .badge {
-            padding: 0.3em 0.8em;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: white;
-            background-color: #555;
-            text-transform: uppercase;
-        }
 
-        .badge.rest { background-color: #0077B6; }
-        .badge.python { background-color: #3776AB; }
-        .badge.fastapi { background-color: #005571; }
-        .badge.sqlite { background-color: #003B57; }
+SQLite Database: Uses a simple file-based SQLite database for data persistence.
 
-        section {
-            margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-        }
 
-        h2 {
-            color: var(--secondary-color);
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
+Input Validation: Checks for duplicate entries and invalid data (e.g., future publication years).
 
-        h3 {
-            color: var(--secondary-color);
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
 
-        p, ul {
-            margin-bottom: 1rem;
-        }
+Error Handling: Provides clear error messages for common issues, like not finding a book (404).
 
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        ul li::before {
-            content: '•';
-            color: var(--primary-color);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
 
-        pre {
-            background-color: #2D2D2D;
-            color: #CCCCCC;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-top: 1rem;
-        }
+Automatic Interactive Docs: Comes with interactive API documentation (Swagger UI) provided by FastAPI.
 
-        code {
-            background-color: var(--code-bg);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.95rem;
-            color: #c7254e;
-        }
+🛠️ Technology Stack
+Python 3
 
-        .endpoint-card {
-            background: #F8F9FA;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.2s;
-        }
 
-        .endpoint-card:hover {
-            transform: translateY(-5px);
-        }
+FastAPI: The web framework used to build the API.
 
-        .endpoint-card h4 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.25rem;
-            color: var(--primary-color);
-        }
 
-        .endpoint-card .method {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            margin-right: 0.5rem;
-            border-radius: 6px;
-            font-weight: bold;
-            color: white;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-        }
+Uvicorn: The ASGI server used to run the application.
 
-        .method.get { background-color: #10B981; }
-        .method.post { background-color: #3B82F6; }
-        .method.put { background-color: #F59E0B; }
-        .method.delete { background-color: #EF4444; }
 
-        .endpoint-path {
-            font-family: monospace;
-            background-color: var(--card-bg);
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            color: #1F2937;
-        }
+SQLite: The SQL database engine used for storage.
 
-        .response-code {
-            font-weight: bold;
-        }
-        
-        .success { color: #10B981; }
-        .error { color: #EF4444; }
+🚀 Getting Started
+Follow these instructions to get the project up and running on your local machine.
 
-        .note {
-            background-color: #FFFBEA;
-            border-left: 5px solid #FCD34D;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1><span role="img" aria-label="books emoji">📚</span> Book Library API</h1>
-            <p class="subtitle">A simple and efficient RESTful API for managing a collection of books.</p>
-            <div class="badges">
-                <span class="badge rest">RESTful</span>
-                <span class="badge python">Python 3</span>
-                <span class="badge fastapi">FastAPI</span>
-                <span class="badge sqlite">SQLite</span>
-            </div>
-        </header>
+Prerequisites
+Make sure you have Python 3.8+ installed on your system.
 
-        <section id="features">
-            <h2>✨ Features</h2>
-            <ul>
-                <li><strong>Complete CRUD Operations:</strong> Seamlessly create, read, update, and delete book records.</li>
-                <li><strong>High-Performance Framework:</strong> Built using the modern, fast, and robust **FastAPI**.</li>
-                <li><strong>Lightweight Database:</strong> Data is stored persistently in a simple, file-based **SQLite** database.</li>
-                <li><strong>Robust Input Validation:</strong> The API intelligently validates data, handling cases like duplicate entries and invalid publication years.</li>
-                <li><strong>Clear Error Handling:</strong> Provides user-friendly error messages with appropriate HTTP status codes for a better developer experience.</li>
-                <li><strong>Automatic Interactive Docs:</strong> Get started instantly with auto-generated API documentation via Swagger UI and ReDoc.</li>
-            </ul>
-        </section>
+Installation & Setup
+Clone the repository:
 
-        <section id="technology-stack">
-            <h2>🛠️ Technology Stack</h2>
-            <p>This project leverages the following technologies:</p>
-            <ul>
-                <li><strong>Python 3:</strong> The core programming language.</li>
-                <li><strong>FastAPI:</strong> The web framework for building the API.</li>
-                <li><strong>Uvicorn:</strong> An ultra-fast ASGI server for running the application.</li>
-                <li><strong>SQLite:</strong> The serverless, self-contained SQL database engine.</li>
-            </ul>
-        </section>
+Bash
 
-        <section id="getting-started">
-            <h2>🚀 Getting Started</h2>
-            <p>Follow these simple steps to get the API up and running on your local machine.</p>
-            
-            <h3>Prerequisites</h3>
-            <p>Ensure you have <strong>Python 3.8+</strong> installed on your system.</p>
-            
-            <h3>Installation & Setup</h3>
-            <ol>
-                <li><strong>Clone the repository:</strong>
-                    <pre><code>git clone &lt;your-repository-url&gt;
-cd &lt;repository-folder&gt;</code></pre>
-                </li>
-                <li><strong>Create a virtual environment (recommended):</strong>
-                    <pre><code># On macOS and Linux
+git clone <your-repository-url>
+cd <repository-folder>
+Create a virtual environment (recommended):
+
+On macOS and Linux:
+
+Bash
+
 python3 -m venv venv
 source venv/bin/activate
+On Windows:
 
-# On Windows
+Bash
+
 python -m venv venv
-.\venv\Scripts\activate</code></pre>
-                </li>
-                <li><strong>Install the required packages:</strong>
-                    <p>The <code>requirements.txt</code> file contains all the necessary dependencies.</p>
-                    <pre><code>pip install -r requirements.txt</code></pre>
-                </li>
-                <li><strong>Run the API server:</strong>
-                    <pre><code>uvicorn main:app --reload</code></pre>
-                    <p>The <code>--reload</code> flag enables automatic server restarts on code changes. The API will now be live at <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a>.</p>
-                </li>
-            </ol>
-        </section>
+.\venv\Scripts\activate
+Install the required packages:
+The 
 
-        <section id="api-endpoints">
-            <h2>📖 API Endpoints Documentation</h2>
-            <p>The API provides a complete set of endpoints to manage your books. For a rich, interactive experience, navigate to the auto-generated documentation pages:</p>
-            <ul>
-                <li><strong>Swagger UI:</strong> <a href="http://127.0.0.1:8000/docs" target="_blank">http://127.0.0.1:8000/docs</a></li>
-                <li><strong>ReDoc:</strong> <a href="http://127.0.0.1:
+requirements.txt file contains all the necessary Python packages.
+
+Bash
+
+pip install -r requirements.txt
+Run the API server:
+
+Bash
+
+uvicorn main:app --reload
+The --reload flag makes the server restart automatically after code changes. The API will now be running at http://127.0.0.1:8000.
+
+📖 API Documentation
+This API provides endpoints to manage books. For a rich, interactive experience, run the server and navigate to:
+
+Swagger UI: http://127.0.0.1:8000/docs
+
+ReDoc: http://127.0.0.1:8000/redoc
+
+Here you can view and test all the API endpoints directly from your browser!
+
+Endpoint Details
+1. Get All Books
+Endpoint: /books/
+
+Method: GET
+
+Description: Retrieves a list of all books in the library.
+
+curl Example:
+
+Bash
+
+curl -X GET "http://127.0.0.1:8000/books/"
+Success Response (200 OK):
+
+JSON
+
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "year": 1818
+    },
+    {
+      "id": 2,
+      "title": "Dracula",
+      "author": "Bram Stoker",
+      "year": 1897
+    }
+  ]
+}
+2. Find a Specific Book
+Endpoint: /find/
+
+Method: GET
+
+Description: Finds and retrieves a single book by its id.
+
+Query Parameters:
+
+id (integer, required): The unique ID of the book.
+
+curl Example:
+
+Bash
+
+curl -X GET "http://127.0.0.1:8000/find/?id=1"
+Success Response (200 OK):
+
+JSON
+
+{
+    "id": 1,
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "year": 1818
+}
+3. Add a New Book
+Endpoint: /addbook/
+
+Method: GET (Note: POST is conventionally used for creating resources)
+
+Description: Adds a new book to the library.
+
+Query Parameters:
+
+title (string, required)
+
+author (string, required)
+
+year (integer, required)
+
+curl Example:
+
+Bash
+
+curl -X GET "http://127.0.0.1:8000/addbook/?title=New%20Book&author=Some%20Author&year=2025"
+Success Response (200 OK):
+
+JSON
+
+{
+  "message": "Book 'New Book' added successfully!"
+}
+4. Update a Book
+Endpoint: /updatebook/
+
+Method: GET (Note: PUT or PATCH is conventionally used for updating)
+
+Description: Updates the details of an existing book by its id.
+
+Query Parameters:
+
+id, title, author, year (all required)
+
+curl Example:
+
+Bash
+
+curl -X GET "http://127.0.0.1:8000/updatebook/?id=1&title=Updated%20Title&author=Updated%20Author&year=2024"
+Success Response (200 OK):
+
+JSON
+
+{
+  "message": "Book with id 1 updated successfully!"
+}
+5. Delete a Book
+Endpoint: /deletebook/
+
+Method: GET (Note: DELETE is conventionally used for deleting)
+
+Description: Deletes a book from the library by its id.
+
+Query Parameters:
+
+id (integer, required): The unique ID of the book to delete.
+
+curl Example:
+
+Bash
+
+curl -X GET "http://127.0.0.1:8000/deletebook/?id=1"
+Success Response (200 OK):
+
+JSON
+
+{
+  "message": "Book with id 1 deleted successfully!"
+}
+📂 Project Structure
+.
+├── main.py          # The main FastAPI application file
+├── books.db         # The SQLite database file
+└── requirements.txt   # Python package dependencies
