@@ -1,0 +1,77 @@
+Task: Build a REST API with Python
+
+Objective:
+Create a RESTful API using Python (Flask/FastAPI/Django REST Framework) that performs CRUD operations and demonstrates understanding of Python, API design, and database interaction.
+
+Task Requirements:
+
+API Functionality:
+
+Build a simple API (e.g., for a Task Management or Book Library system)
+
+Implement CRUD operations:
+
+Create new resource
+
+Read/list resources
+
+Update resource
+
+Delete resource
+
+Database Integration:
+
+Use SQLite/PostgreSQL/MySQL to store data
+
+Ensure proper schema design and relationships (if needed)
+
+Validation & Error Handling:
+
+Validate input data
+
+Handle errors gracefully (e.g., 404 for missing items)
+
+Documentation:
+
+Include API documentation (Swagger/OpenAPI or Postman collection)
+
+Optional Advanced Features:
+
+Add authentication (JWT or session-based)
+
+Implement search or filter endpoints
+
+Deploy API using Docker
+
+Deliverables:
+
+GitHub/GitLab repo link with Python project
+
+API endpoints documentation (Swagger/OpenAPI or Postman collection)
+
+Optional: Deployment instructions (Dockerfile or hosting info)
+
+Evaluation Criteria:
+
+Correct and functional CRUD operations
+
+Proper Python coding standards and structure
+
+Database integration and schema design
+
+API documentation clarity
+
+Optional: Authentication, filters, and deployment
+
+
+
+
+
+
+Main task:
+    
+Flask or Fast API
+
+Django is mainly for full stack development
+
+And oder requirement only API
